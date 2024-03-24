@@ -59,7 +59,7 @@ public class TransactionServiceImpl implements TransactionService{
 	}
 	
 	private Mono<Product> getProduct(Long idProduct) {
-		WebClient build=this.createWebClient("http://localhost:8080/products");
+		WebClient build=this.createWebClient("http://bussinessdomain-product/products");
 		return build.method(HttpMethod.GET).uri("/"+idProduct) 
 				.retrieve()
 				.onStatus(HttpStatusCode::is4xxClientError, response->Mono.error(()->new NotFoundException("Product not found")))
@@ -69,7 +69,7 @@ public class TransactionServiceImpl implements TransactionService{
 	}
 	
 	private Mono<Customer> getCustomer(Long idCustomer) {
-		WebClient build=this.createWebClient("http://localhost:8081/customers");
+		WebClient build=this.createWebClient("http://bussinessdomain-customer/customers");
 		return build.method(HttpMethod.GET).uri("/"+idCustomer) 
 				.retrieve()
 				.onStatus(HttpStatusCode::is4xxClientError, response->Mono.error(()->new NotFoundException("Customer not found")))

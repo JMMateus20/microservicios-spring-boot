@@ -2,6 +2,7 @@ package com.paymentchain.product.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ import com.paymentchain.product.repository.ProductRepository;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -32,8 +33,19 @@ public class ProductController {
 	private final ProductRepository productRep;
 	
 	
+	
+	public ProductController(ProductRepository productRep) {
+		
+		this.productRep = productRep;
+	}
+
+	@Value("${user.role}")
+	private String role;
+	
+	
 	@PostMapping
 	public ResponseEntity<Product> post(@RequestBody ProductRequestDTO product){
+		System.out.println(this.role);
 		return ResponseEntity.status(HttpStatus.CREATED).body(this.productRep.save(new Product(product.getName(), product.getCode())));
 	}
 	

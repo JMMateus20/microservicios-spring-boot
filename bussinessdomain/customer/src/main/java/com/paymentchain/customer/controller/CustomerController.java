@@ -181,11 +181,11 @@ public class CustomerController {
 	
 	private String getProductName(Long id) {
 		WebClient build=this.webClientBuilder
-				.baseUrl("http://localhost:8080/products") //es el requestMapping del controlador del microservicio de productos
+				.baseUrl("http://bussinessdomain-product/products") //es el requestMapping del controlador del microservicio de productos
 				.defaultHeader(HttpHeaders.CONTENT_TYPE, 
 						MediaType.APPLICATION_JSON_VALUE)
 				.defaultUriVariables(Collections.singletonMap
-						("url", "http://localhost:8080/products"))
+						("url", "http://bussinessdomain-product/products"))
 				.build();
 		
 		JsonNode block=build.method(HttpMethod.GET).uri("/"+id) //como vamos a obtener un producto por su id llamado al
@@ -200,11 +200,11 @@ public class CustomerController {
 	
 	private Mono<Producto> getProduct(Long id) {
 		WebClient build=this.webClientBuilder
-				.baseUrl("http://localhost:8080/products") //es el requestMapping del controlador del microservicio de productos
+				.baseUrl("http://bussinessdomain-product/products") //es el requestMapping del controlador del microservicio de productos
 				.defaultHeader(HttpHeaders.CONTENT_TYPE, 
 						MediaType.APPLICATION_JSON_VALUE)
 				.defaultUriVariables(Collections.singletonMap
-						("url", "http://localhost:8080/products"))
+						("url", "http://bussinessdomain-product/products"))
 				.build();
 		return build.method(HttpMethod.GET)
 				.uri("/"+id)
@@ -215,11 +215,11 @@ public class CustomerController {
 	
 	private Mono<List<Transaction>> getTransactions(Long idCliente){
 		WebClient build=this.webClientBuilder
-				.baseUrl("http://localhost:8082/transactions") 
+				.baseUrl("http://bussinessdomain-transaction/transactions") 
 				.defaultHeader(HttpHeaders.CONTENT_TYPE, 
 						MediaType.APPLICATION_JSON_VALUE)
 				.defaultUriVariables(Collections.singletonMap
-						("url", "http://localhost:8082/transactions"))
+						("url", "http://bussinessdomain-transaction/transactions"))
 				.build();
 		return build.method(HttpMethod.GET)
 		.uri("/bycustomer/"+idCliente)
